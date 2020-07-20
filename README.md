@@ -1,16 +1,129 @@
-# inline_dialogs
+#  inline_dialogs
 
-A simple Flutter package to implement inline dialogs which can be managed from the main context.
+A lightweight Flutter package to implement inline dialogs which can be managed from the main context.
 The dialog can be closed from the same code from which it was invoked. 
 It also gives back return values on closure helping the developer catch user action on the dialog.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+1. Add below builder code in MaterialApp() in main.dart page [sample](https://github.com/1SouravGhosh/flutter_inline_dialogs/blob/master/example/sample_app.dart/)
 
+<pre>
+<code class='language-dart hljs'>
+ builder: (context, widget) => Navigator(
+        onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => DialogManager(
+                  child: widget,
+                )),
+      ),
+
+</code>
+</pre>
+
+2. Add dialogSetupLocator in main() in main.dart page [sample](https://github.com/1SouravGhosh/flutter_inline_dialogs/blob/master/example/sample_app.dart/)
+
+<pre>
+<code class='language-dart hljs'>
+ void main() {
+  dialogSetupLocator();
+  runApp(MyApp());
+}
+
+</code>
+</pre>
+
+That's it! You are good to go. 
+
+## Demo
+<p><img src='https://raw.githubusercontent.com/1SouravGhosh/flutter_inline_dialogs/master/assets/explainer.gif' style='width: 30vw; min-width: 30px;' alt='Inline dialog Demo'/>
+</p>
+
+# Implementation
+
+
+1. Implement option dialog  [ dialogType: DialogType.option ]
+<pre>
+<code class='language-dart hljs'>
+ var _dialogResponse = await _dialogService.showDialog(
+                      title: Icon(
+                        Icons.code,
+                        size: 50,
+                        color: Colors.orange,
+                      ),
+                      content: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          'Sample option dialog',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                      dialogType: DialogType.option,
+                      optionRight: 'Right',
+                      optionLeft: 'Left');
+                 
+                    
+print(_dialogResponse.optionRight);
+print(_dialogResponse.optionLeft);
+                  
+</code>
+</pre>
+
+2. Implement confirm dialog  [ dialogType: DialogType.option ]
+<pre>
+<code class='language-dart hljs'>
+ var _dialogResponse = await _dialogService.showDialog(
+                      title: Icon(
+                        Icons.done_outline,
+                        size: 50,
+                        color: Colors.green,
+                      ),
+                      content: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          'Sample confirm dialog',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                      dialogType: DialogType.confirm,
+                      buttonText: 'Done');
+                 
+                    setState(() {
+                      _confirmBtn =  _dialogResponse.confirmed;
+                  });
+                                  
+print('${_dialogResponse.confirmed}');
+                  
+</code>
+</pre>
+
+3. Implement waiter dialog  [ dialogType: DialogType.waiter]
+<pre>
+<code class='language-dart hljs'>
+ _dialogService.showDialog(
+                      title: Text(
+                        'Sample waiter dialog',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      content: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: CupertinoActivityIndicator(
+                          radius: 20,
+                        ),
+                      ),
+                      dialogType: DialogType.waiter);
+                  await Future.delayed(Duration(seconds: 5));
+                  _dialogService.dismissDialog();               
+</code>
+</pre>
+
+
+
+You can close all of the above dialogs by using   _dialogService.dismissDialog(); from the same context where the dialog was invoked.
+
+## Documentation
 For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
+[github repo](https://github.com/1SouravGhosh/flutter_inline_dialogs/), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
+
