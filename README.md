@@ -120,6 +120,13 @@ print('${_dialogResponse.confirmed}');
 
 You can close all of the above dialogs by using   _dialogService.dismissDialog(); from the same context where the dialog was invoked.
 
+## Credit
+
+A special shout out to FilledStacks YouTube channel. Please show some love and subscribe to this channel.
+[YouTube Link](https://www.youtube.com/watch?v=IrFU_BrCWnE)
+
+**The code has been modified heavily for ease of modular implementation and more features have been added.
+
 ## Documentation
 For help getting started with Flutter, view our 
 [github repo](https://github.com/1SouravGhosh/flutter_inline_dialogs/), which offers tutorials, 
