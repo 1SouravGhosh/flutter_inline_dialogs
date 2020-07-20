@@ -35,7 +35,7 @@ It also gives back return values on closure helping the developer catch user act
 That's it! You are good to go. 
 
 ## Demo
-<p><img src='https://raw.githubusercontent.com/1SouravGhosh/flutter_inline_dialogs/master/assets/explainer.gif' style='width: 30vw; min-width: 30px;' alt='Inline dialog Demo'/>
+<p><img src='https://raw.githubusercontent.com/1SouravGhosh/flutter_inline_dialogs/master/assets/explainer.gif' style='width: 30vw; min-width: 30px;' alt='Inline dialog demo'/>
 </p>
 
 # Implementation
@@ -68,7 +68,7 @@ print(_dialogResponse.optionLeft);
 </code>
 </pre>
 
-2. Implement confirm dialog  [ dialogType: DialogType.option ]
+2. Implement confirm dialog  [ dialogType: DialogType.confirm ]
 <pre>
 <code class='language-dart hljs'>
  var _dialogResponse = await _dialogService.showDialog(
