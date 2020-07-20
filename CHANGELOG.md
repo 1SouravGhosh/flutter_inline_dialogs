@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.1] - 20th July 2020
 
-* TODO: Describe initial release.
+* This is the initial release. 
+* The package is stable and same code being used used in multiple production app. 

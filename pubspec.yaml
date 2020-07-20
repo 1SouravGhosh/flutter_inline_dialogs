@@ -1,8 +1,7 @@
 name: inline_dialogs
 description: A simple Flutter package to implement inline dialogs which can be managed from the main program context. The dialog can be closed from the same code from which it was invoked.
-version: 0.0.1
-author: Sourav Ghosh
-homepage: https://github.com/1SouravGhosh/flutter_inline_dialogs_app
+version: 1.0.1
+homepage: https://github.com/1SouravGhosh/flutter_inline_dialogs
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
