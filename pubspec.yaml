@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  get_it: ^1.0.3+2
+  get_it: ^4.0.2
 
 dev_dependencies:
   flutter_test:
