@@ -2,10 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inline_dialogs/custom_utils/service_locator.dart';
+import 'package:get_it/get_it.dart';
 import 'package:inline_dialogs/dialogs/manager.dart';
 import 'package:inline_dialogs/dialogs/model.dart';
 import 'package:inline_dialogs/dialogs/service.dart';
+
+GetIt locator = GetIt.instance;
+
+void dialogSetupLocator() {
+  locator.registerSingleton(DialogService());
+}
 
 void main() {
   dialogSetupLocator();
@@ -20,9 +26,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: (context, widget) => Navigator(
         onGenerateRoute: (settings) => MaterialPageRoute(
-            builder: (context) => DialogManager(
-                  child: widget,
-                )),
+          builder: (context) => DialogManager(
+            dialogService: locator<DialogService>(),
+            child: widget,
+          ),
+        ),
       ),
       theme: ThemeData(
         primarySwatch: Colors.blue,

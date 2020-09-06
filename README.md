@@ -6,40 +6,86 @@ It also gives back return values on closure helping the developer catch user act
 
 ## Getting Started
 
-1. Add below builder code in MaterialApp() in main.dart page [sample](https://github.com/1SouravGhosh/flutter_inline_dialogs/blob/master/example/sample_app.dart/)
+1. Firstly add `inline_dialogs` as a dependency:
 
-<pre>
-<code class='language-dart hljs'>
- builder: (context, widget) => Navigator(
-        onGenerateRoute: (settings) => MaterialPageRoute(
-            builder: (context) => DialogManager(
-                  child: widget,
-                )),
-      ),
+```yml
+dependencies:
+  flutter:
+    sdk: flutter
+  inline_dialogs:
+```
 
-</code>
-</pre>
+2. The package consists of `DialogManager` and `DialogService`, with `DialogService` passed as a constructor argument to `DialogManager`. This can be achieved via dependency injection (i.e. *Provider*) or a service locator (i.e. *get_it*).
 
-2. Add dialogSetupLocator in main() in main.dart page [sample](https://github.com/1SouravGhosh/flutter_inline_dialogs/blob/master/example/sample_app.dart/)
+### *get_it*
 
-<pre>
-<code class='language-dart hljs'>
- void main() {
+Firstly register `DialogService` as a singleton
+
+```dart
+import 'package:get_it/get_it.dart';
+import 'package:inline_dialogs/dialogs/service.dart';
+
+GetIt locator = GetIt.instance;
+
+void dialogSetupLocator() {
+  locator.registerSingleton(DialogService());
+}
+```
+
+```dart
+void main() {
   dialogSetupLocator();
   runApp(MyApp());
 }
+```
 
-</code>
-</pre>
+then add `DialogManager` to MaterialApp's builder method
 
-That's it! You are good to go. 
+```dart
+MaterialApp(
+  builder: (context, widget) => Navigator(
+    onGenerateRoute: (settings) => MaterialPageRoute(
+      builder: (context) => DialogManager(
+        dialogService: locator<DialogService>(),
+        child: widget,
+      ),
+    ),
+  ),
+),
+```
+
+### *provider*
+
+Firstly register `DialogService` for DI
+
+```dart
+Provider<DialogService>(
+  create: (context) => DialogService(),
+)
+```
+
+then add `DialogManager` to MaterialApp's builder method
+
+```dart
+MaterialApp(
+  builder: (context, widget) => Navigator(
+    onGenerateRoute: (settings) => MaterialPageRoute(
+      builder: (context) => DialogManager(
+        dialogService: Provider.of<DialogService>(context),
+        child: widget,
+      ),
+    ),
+  ),
+),
+```
+
+3. That's it! You are good to go.
 
 ## Demo
-<p><img src='https://raw.githubusercontent.com/1SouravGhosh/flutter_inline_dialogs/master/assets/explainer.gif' style='width: 30vw; min-width: 30px;' alt='Inline dialog demo'/>
-</p>
 
-# Implementation
+<p><img src='https://raw.githubusercontent.com/1SouravGhosh/flutter_inline_dialogs/master/assets/explainer.gif' style='width: 30vw; min-width: 30px;' alt='Inline dialog demo'/></p>
 
+## Implementation
 
 1. Implement option dialog  [ dialogType: DialogType.option ]
 <pre>
@@ -131,6 +177,3 @@ A special shout out to FilledStacks YouTube channel. Please show some love and s
 For help getting started with Flutter, view our 
 [github repo](https://github.com/1SouravGhosh/flutter_inline_dialogs/), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
-
-
-

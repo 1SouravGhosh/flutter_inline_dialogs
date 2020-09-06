@@ -1,23 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inline_dialogs/custom_utils/service_locator.dart';
-import 'package:inline_dialogs/dialogs/model.dart';
-import 'package:inline_dialogs/dialogs/service.dart';
+
+import 'model.dart';
+import 'service.dart';
 
 class DialogManager extends StatefulWidget {
+  final DialogService dialogService;
   final Widget child;
-  DialogManager({Key key, this.child}) : super(key: key);
+
+  DialogManager({
+    Key key,
+    @required this.dialogService,
+    @required this.child,
+  })  : assert(dialogService != null),
+        assert(child != null),
+        super(key: key);
 
   _DialogManagerState createState() => _DialogManagerState();
 }
 
 class _DialogManagerState extends State<DialogManager> {
-  DialogService _dialogService = locator<DialogService>();
-
   @override
   void initState() {
     super.initState();
-    _dialogService.registerDialogListener(_showDialog, _dismissDialog);
+    widget.dialogService.registerDialogListener(_showDialog, _dismissDialog);
   }
 
   @override
@@ -44,11 +50,12 @@ class _DialogManagerState extends State<DialogManager> {
             ));
   }
 
-  List<CupertinoDialogAction> _buildButton(
-      {DialogType dialogType,
-      String optionLeft,
-      String optionRight,
-      String buttonText}) {
+  List<CupertinoDialogAction> _buildButton({
+    DialogType dialogType,
+    String optionLeft,
+    String optionRight,
+    String buttonText,
+  }) {
     switch (dialogType) {
       case DialogType.option:
         {
@@ -59,7 +66,7 @@ class _DialogManagerState extends State<DialogManager> {
                 style: TextStyle(color: Colors.blueAccent),
               ),
               onPressed: () {
-                _dialogService.dialogComplete(
+                widget.dialogService.dialogComplete(
                     DialogResponse(optionLeft: optionLeft, confirmed: true));
                 Navigator.of(context).pop();
               },
@@ -70,7 +77,7 @@ class _DialogManagerState extends State<DialogManager> {
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
-                _dialogService.dialogComplete(
+                widget.dialogService.dialogComplete(
                     DialogResponse(optionRight: optionRight, confirmed: true));
                 Navigator.of(context).pop();
               },
@@ -90,7 +97,7 @@ class _DialogManagerState extends State<DialogManager> {
                 ),
               ),
               onPressed: () {
-                _dialogService.dialogComplete(
+                widget.dialogService.dialogComplete(
                     DialogResponse(optionLeft: buttonText, confirmed: true));
                 Navigator.of(context).pop();
               },
