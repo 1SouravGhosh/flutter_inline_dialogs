@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:inline_dialogs/dialogs/manager.dart';
-import 'package:inline_dialogs/dialogs/model.dart';
-import 'package:inline_dialogs/dialogs/service.dart';
+import 'package:inline_dialogs/inline_dialogs.dart';
 
 GetIt locator = GetIt.instance;
 
