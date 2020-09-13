@@ -1,5 +1,5 @@
 library inline_dialogs;
 
-import 'package:inline_dialogs/dialogs/manager.dart';
-
-class InlineDialog extends DialogManager {}
+export 'src/manager.dart';
+export 'src/model.dart';
+export 'src/service.dart';

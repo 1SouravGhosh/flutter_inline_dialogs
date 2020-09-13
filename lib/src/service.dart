@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inline_dialogs/dialogs/model.dart';
+
+import 'model.dart';
 
 class DialogService {
   Function(DialogRequest) _showDialogListener;
